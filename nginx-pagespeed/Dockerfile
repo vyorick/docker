@@ -39,9 +39,8 @@ EXPOSE 443
 RUN useradd -r -s /usr/sbin/nologin nginx && mkdir -p /var/log/nginx /var/cache/nginx && \
 	apt-get update && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
 	apt-get -y install wget build-essential zlib1g-dev libpcre3-dev libssl-dev libxslt1-dev libxml2-dev libgd2-xpm-dev libgeoip-dev libgoogle-perftools-dev libperl-dev && \
-	echo "Downloading ngx_pagespeed v${PAGESPEED_VERSION} ..." && wget -qO - https://github.com/pagespeed/ngx_pagespeed/archive/v${PAGESPEED_VERSION}.tar.gz | tar zxf - -C /tmp && \
-	echo "Downloading pagespeed psol v${PAGESPEED_VERSION} ..." && wget -qO - https://dl.google.com/dl/page-speed/psol/${PAGESPEED_VERSION}.tar.gz | tar xzf  - -C /tmp/ngx_pagespeed-${PAGESPEED_VERSION} && \
-	echo "Downloading nginx v${NGINX_VERSION} ..." && wget -qO - http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar zxf - -C /tmp && \
+	echo "Downloading ngx_pagespeed v${PAGESPEED_VERSION} ..." && wget -qO - https://github.com/pagespeed/ngx_pagespeed/archive/v${PAGESPEED_VERSION}-beta.tar.gz | tar zxf - -C /tmp && \
+	echo "Downloading pagespeed psol v${PAGESPEED_VERSION} ..." && wget -qO - https://dl.google.com/dl/page-speed/psol/${PAGESPEED_VERSION}.tar.gz | tar xzf  - -C /tmp/ngx_pagespeed-${PAGESPEED_VERSION}-beta && \	echo "Downloading nginx v${NGINX_VERSION} ..." && wget -qO - http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar zxf - -C /tmp && \
 	echo "Downloading openssl v${OPENSSL_VERSION} ..." && wget -qO - https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz | tar xzf  - -C /tmp && \
 	cd /tmp/nginx-${NGINX_VERSION} && ./configure \
 		--prefix=/etc/nginx  \
@@ -85,7 +84,7 @@ RUN useradd -r -s /usr/sbin/nologin nginx && mkdir -p /var/log/nginx /var/cache/
 		--with-ipv6 \
 		--with-pcre-jit \
 		--with-openssl=/tmp/openssl-${OPENSSL_VERSION} \
-		--add-module=/tmp/ngx_pagespeed-${PAGESPEED_VERSION} && make && make install && \
+		--add-module=/tmp/ngx_pagespeed-${PAGESPEED_VERSION}-beta && make && make install && \
 	rm -Rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	apt-get purge -yqq wget build-essential && \
 	apt-get autoremove -yqq && \
