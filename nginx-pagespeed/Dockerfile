@@ -20,6 +20,9 @@ ENV NGINX_VERSION 1.9.3
 # https://www.openssl.org/source
 ENV OPENSSL_VERSION 1.0.1p
 
+# Enable ssh access
+RUN rm -f /etc/service/sshd/down
+
 # Regenerate SSH host keys. baseimage-docker does not contain any, so you
 # have to do that yourself. You may also comment out this instruction; the
 # init system will auto-generate one during boot.
@@ -30,8 +33,7 @@ CMD ["/sbin/my_init"]
 
 ### ...put your own build instructions here... ###
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 80 443
 
 # RUN apt-get update
 # RUN DEBIAN_FRONTEND=noninteractive sudo apt-get upgrade -y
