@@ -28,6 +28,9 @@ RUN rm -f /etc/service/sshd/down
 # init system will auto-generate one during boot.
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
+# !!! Enabling the insecure key permanently !!! REMOVE ME AT PRODUCTION
+RUN /usr/sbin/enable_insecure_key
+
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
