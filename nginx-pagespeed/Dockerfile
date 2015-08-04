@@ -96,6 +96,13 @@ RUN rm -Rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	apt-get autoremove -yqq && \
 	apt-get clean
 
+# for mount tmpfs volumes
+VOLUME ["/var/cache/nginx"]
+VOLUME ["/var/cache/pagespeed"]
+
+# for mount configs
+VOLUME ["/etc/nginx"]
+
 ENV DEFAULT_APP_USER nginx
 ENV DEFAULT_APP_GROUP nginx
 ENV	DEFAULT_UPLOAD_MAX_SIZE 30M
