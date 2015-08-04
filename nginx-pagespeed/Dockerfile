@@ -101,7 +101,7 @@ VOLUME ["/var/cache/nginx"]
 VOLUME ["/var/cache/pagespeed"]
 
 # for mount configs
-VOLUME ["/etc/nginx"]
+VOLUME ["/etc/nginx/sites-enabled"]
 
 ENV DEFAULT_APP_USER nginx
 ENV DEFAULT_APP_GROUP nginx
